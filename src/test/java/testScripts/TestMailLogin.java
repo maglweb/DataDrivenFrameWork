@@ -2,6 +2,7 @@ package testScripts;
 
 import java.util.concurrent.TimeUnit;
 
+import org.junit.BeforeClass;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
@@ -10,10 +11,12 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.AfterMethod;
 
 import pageObjects.LoginPage;
+import util.Constant;
+import util.ExcelUtil;
 
 public class TestMailLogin {
 	public WebDriver driver;
-	String baseurl = "http://mail.x.com.cn/";
+	String baseurl = Constant.Url;
 
 	@Test
 	public void TestLogin() throws Exception {
@@ -37,4 +40,10 @@ public class TestMailLogin {
 		driver.quit();
 	}
 
+	@BeforeClass
+	public void BeforeClass() {
+		// 使用Constant类中的常量，设定测试数据文件的文件路径和测试数据所在的Sheet名称
+		ExcelUtil.setExcelFile(Constant.TestDataExcelFilePath,
+				Constant.TestDataExcelFileSheet);
+	}
 }
